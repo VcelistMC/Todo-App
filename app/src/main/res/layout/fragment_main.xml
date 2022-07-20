@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary"
+    tools:context=".MainActivity">
+
+
+    <LinearLayout
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        android:id="@+id/title_container"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="05 May"
+            android:textSize="30sp"
+            android:layout_weight="1"
+            android:textColor="#ececec"
+            android:textAlignment="center"
+            android:layout_margin="20dp"
+            android:id="@+id/current_date"/>
+        <!--        <TextView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            tools:text="8 Items"-->
+        <!--            android:textSize="20sp"-->
+        <!--            android:textAlignment="center"-->
+        <!--            android:layout_weight="1"-->
+        <!--            android:layout_margin="20dp"-->
+        <!--            android:textColor="@color/white"/>-->
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:paddingTop="20dp"
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_container"
+        android:padding="10dp"
+        tools:listitem="@layout/card_todo_item"
+        android:background="@drawable/bg">
+
+    </androidx.recyclerview.widget.RecyclerView>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="20dp"
+        android:elevation="0dp"
+        android:id="@+id/add_task"
+        android:backgroundTint="@color/primary"
+        android:src="@drawable/plus"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
