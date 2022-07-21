@@ -99,6 +99,17 @@ class MainFragment : Fragment() {
 
     private fun initAdapter(recyclerView: RecyclerView){
         initAdapterViewModel()
+        
+//         Here handle callback that should send for adapter
+//         like this
+// 
+//         adapter = RecyclerViewAdapter(
+//             onItemClickListener = {itemIndex ->
+//                 navigateToTodoDetails(itemIndex)
+//             }, onCheckBoxChanged = { _, b,position ->
+//                 viewModel.changeStatus(position, b)
+//             })
+
         adapter = RecyclerViewAdapter()
         recyclerView.adapter = adapter
         initViewModelListener()
