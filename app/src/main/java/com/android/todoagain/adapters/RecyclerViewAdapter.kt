@@ -16,6 +16,16 @@ import com.android.todoagain.R
 import com.android.todoagain.models.TodoItem
 import com.android.todoagain.viewmodels.TodoViewModel
 
+//  this adapter should have two callback paramters 
+// First call back to handle navigate from list to todo details
+// second call to update when checkbox clicked
+// someething like this 
+
+// class RecyclerViewAdapter(
+//     var onItemClickListener: (Int) -> (Unit),
+//     var onCheckBoxChanged: (CompoundButton, Boolean,Int) -> (Unit)
+// )
+
 class RecyclerViewAdapter() :
     RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
     private  var allItems: List<TodoItem> = emptyList()
@@ -36,6 +46,8 @@ class RecyclerViewAdapter() :
             titleView = view.findViewById(R.id.title_view)
             dueDateView = view.findViewById(R.id.due_date)
             checkBox = view.findViewById(R.id.checkbox)
+            
+//             This line should be deleted
             initItemClickListener(view)
 //            initCheckBoxListener(adapterPosition)
 
@@ -44,7 +56,8 @@ class RecyclerViewAdapter() :
             setCheckBox(item.done)
             todoItem = item
             itemIndex = index
-
+            
+//             These lines should be deleted
             if(!listenersInited) {
                 initCheckBoxListener(itemIndex)
                 listenersInited = true
@@ -57,6 +70,7 @@ class RecyclerViewAdapter() :
 
         private fun setCheckBox(isDone: Boolean){checkBox.isChecked = isDone}
 
+//         It's wrong to let adapter do the navigation this should be handle in fragment
         private fun initItemClickListener(view: View){
             view.setOnClickListener{
                 val fragArgs = TodoViewModel.createBundle(ActionType.VIEW, BundleKeysVals.READ_ONLY, itemIndex)
@@ -71,6 +85,7 @@ class RecyclerViewAdapter() :
             }
         }
 
+//         this method ana onCheckChanged Shouldn't write here
         fun initCheckBoxListener(index: Int){
             TODO("Changing it to onCheckedChangedListener results in an infinite loop")
             checkBox.setOnClickListener{
@@ -79,7 +94,7 @@ class RecyclerViewAdapter() :
 //                checkBox.isChecked = !checkBox.isChecked
             }
         }
-
+//         It's wrong to call viewModel in adapter
         private fun onCheckedChanged(view: View, isChecked: Boolean, itemIndex: Int) {
             val activity = view.context as AppCompatActivity
             val viewModel = ViewModelProvider(activity).get(TodoViewModel::class.java)
@@ -98,6 +113,17 @@ class RecyclerViewAdapter() :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.setItem(allItems[position], position)
+//         Comment by shaza
+//          Any clicklistener should be here not in viewHolder.set item
+//          here call callback method
+
+//         holder.view.checkbox.setOnCheckedChangeListener { compoundButton, b ->
+//             onCheckBoxChanged(compoundButton,b,position)
+//         }
+
+//         holder.view.setOnClickListener {
+//             onItemClickListener(position)
+//         }
     }
 
     override fun getItemCount(): Int {
